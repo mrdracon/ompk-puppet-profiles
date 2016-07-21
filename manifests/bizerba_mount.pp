@@ -18,7 +18,7 @@ class profile::bizerba_mount {
 
 	mount { '/biz_data':
 		name    => '/biz_data',
-		atboot  => 'true',
+		atboot  => true,
 		ensure  => 'mounted',
 		device  => $device,
 		fstype  => 'cifs',

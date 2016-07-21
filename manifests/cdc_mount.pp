@@ -18,7 +18,7 @@ class profile::cdc_mount {
 
         mount { '/cdc':
                 name    => '/cdc',
-                atboot  => 'true',
+                atboot  => true,
                 ensure  => 'mounted',
                 device  => $device,
                 fstype  => 'cifs',

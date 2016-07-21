@@ -15,6 +15,7 @@ class profile::edi_mount {
 
 	file { '/data':
 		ensure  => 'directory',
+		owner	=> 'oepadm'
 	}
 
 	file { '/exchange':
@@ -23,11 +24,12 @@ class profile::edi_mount {
 
 	file { [ '/data/cinbox' , '/exchange/data' , '/data/saprecadv', '/data/recadvarchive' ]:
 		ensure => 'directory',
+		require	=> File['/exchange'],
 	}
 
 	mount { '/data/cinbox':
 			name    => '/data/cinbox',
-			atboot  => 'true',
+			atboot  => true,
 			ensure  => 'mounted',
 			device  => $device_cinbox,
 			fstype  => 'cifs',
@@ -37,7 +39,7 @@ class profile::edi_mount {
 
 	mount { '/exchange/data':
 			name    => '/exchange/data',
-			atboot  => 'true',
+			atboot  => true,
 			ensure  => 'mounted',
 			device  => $device_exchangedata,
 			fstype  => 'cifs',
@@ -47,7 +49,7 @@ class profile::edi_mount {
 
 	mount { '/data/saprecadv':
 			name    => '/data/saprecadv',
-			atboot  => 'true',
+			atboot  => true,
 			ensure  => 'mounted',
 			device  => $device_saprecadv,
 			fstype  => 'cifs',
@@ -57,7 +59,7 @@ class profile::edi_mount {
 
 	mount { '/data/recadvarchive':
 			name    => '/data/recadvarchive',
-			atboot  => 'true',
+			atboot  => true,
 			ensure  => 'mounted',
 			device  => $device_recadvarchive,
 			fstype  => 'cifs',
