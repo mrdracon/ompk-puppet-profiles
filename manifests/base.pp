@@ -17,5 +17,6 @@ class profile::base {
 	class { "snmp":
 		ro_community	=> $snmp_community,
 		ro_network	=> $snmp_network,
+		agentaddress	=> [ "udp:161", "udp6:161" ],
 	}  
 }
