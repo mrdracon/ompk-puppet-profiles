@@ -1,5 +1,5 @@
 class profile::td1c_mount {
-	# SAP CIFG mount from QNAP 1.1.6.4, for SAP -> 1c exchange
+	# SAP CIFS mount from QNAP 1.1.6.4, for SAP -> 1c exchange
 
         $credentials = hiera(profile::td1c_mount::credentials)
         $options = hiera(profile::td1c_mount::options)

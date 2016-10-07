@@ -4,6 +4,7 @@ class profile::archiving_mount {
         $options = hiera(profile::archiving_mount::options)
         $device = hiera(profile::archiving_mount::device)
 
+	# we get symlink info from host-specific hiera file, for example from msap-erp01.local.sosiska.ru.yaml.
 	$symlink = hiera(profile::archiving_mount::symlink)
 	$symlink_target = hiera(profile::archiving_mount::symlink_target)
 	$symlink_owner = hiera(profile::archiving_mount::symlink_owner)

@@ -1,11 +1,16 @@
 class profile::edi_mount {
 	# EDI - Exite, www.edi.su. For ERP dialog systems
+	# TDDESADV share - exchange with trade houses	
 
 	$device_cinbox = hiera(profile::edi_mount::device_cinbox)
 	$device_exchangedata = hiera(profile::edi_mount::device_exchangedata)
 	$device_saprecadv = hiera(profile::edi_mount::device_saprecadv)
 	$device_recadvarchive = hiera(profile::edi_mount::device_recadvarchive)
+	
 	$device_tddesadv = hiera(profile::edi_mount::device_tddesadv)
+	
+	$device_skbkontur = hiera(profile::edi_mount::device_skbkontur)
+
 	$options = hiera(profile::edi_mount::options)	
 	$credentials = hiera(profile::edi_mount::credentials)
 
@@ -23,7 +28,7 @@ class profile::edi_mount {
 		ensure  => 'directory',
 	}
 
-	file { [ '/data/cinbox' , '/exchange/data' , '/data/saprecadv', '/data/recadvarchive', '/data/tddesadv' ]:
+	file { [ '/data/cinbox' , '/exchange/data' , '/data/saprecadv', '/data/recadvarchive', '/data/tddesadv', '/exchange/SKBKontur' ]:
 		ensure => 'directory',
 		require	=> File['/exchange'],
 	}
@@ -76,5 +81,15 @@ class profile::edi_mount {
                         fstype  => 'cifs',
                         options => $options,
                         require => [ File['/data/tddesadv'], File['/root/credentials_edi'] ],
+        }
+
+	mount { '/exchange/SKBKontur':
+                        name    => '/exchange/SKBKontur',
+                        atboot  => true,
+                        ensure  => 'mounted',
+                        device  => $device_skbkontur,
+                        fstype  => 'cifs',
+                        options => $options,
+                        require => [ File['/exchange/SKBKontur'], File['/root/credentials_edi'] ],
         }
 }       
